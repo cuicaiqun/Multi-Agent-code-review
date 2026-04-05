@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  ai:
+    openai:
+      api-key: ${MINIMAX_API_KEY:your_api_key_here}
+      base-url: ${MINIMAX_API_BASE:https://api.minimax.chat/v1}
+      chat:
+        options:
+          model: ${LLM_MODEL:MiniMax-M2.7}
+          temperature: 0.1
+          max-tokens: 4096
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+contract-review:
+  upload-dir: ./uploads
+  max-text-length: 50000

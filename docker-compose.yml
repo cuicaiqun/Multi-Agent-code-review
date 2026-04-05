@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  # Python 版后端
+  python-backend:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - MINIMAX_API_BASE=${MINIMAX_API_BASE:-https://api.minimax.chat/v1}
+      - LLM_MODEL=${LLM_MODEL:-MiniMax-M2.7}
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+    volumes:
+      - ./uploads:/app/uploads
+
+  # Java 版后端
+  java-backend:
+    build:
+      context: ./java
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - MINIMAX_API_BASE=${MINIMAX_API_BASE:-https://api.minimax.chat/v1}
+      - LLM_MODEL=${LLM_MODEL:-MiniMax-M2.7}
+
+  # Go 版后端
+  go-backend:
+    build:
+      context: ./golang
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - MINIMAX_API_BASE=${MINIMAX_API_BASE:-https://api.minimax.chat/v1}
+      - LLM_MODEL=${LLM_MODEL:-MiniMax-M2.7}
+      - APP_PORT=8082
+
+  # 前端
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_BASE=http://localhost:8000
+    depends_on:
+      - python-backend
