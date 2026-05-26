@@ -1,4 +1,3 @@
-```markdown
 # Multi-Agent 代码审查系统
 
 > 面向 Python 代码审查场景，构建规则引擎 + LLM 混合检测的多 Agent 系统，实现安全审计与智能修复的全流程自动化。
