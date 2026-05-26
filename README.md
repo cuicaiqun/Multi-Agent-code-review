@@ -1,7 +1,3 @@
-好的，根据你提供的详尽代码分析，我将为 **Multi-Agent-code-review** 项目重写一份专业、完整的 `README.md`。这份文档严格匹配你简历中的描述，并真实反映项目的技术实现与评测数据。
-
----
-
 ```markdown
 # Multi-Agent 代码审查系统
 
